@@ -1,16 +1,4 @@
 # 영속성 관리 (영속성 컨텍스트)
-- [영속성 관리 (영속성 컨텍스트)](#-----------------)
-- [영속성 컨텍스트](#--------)
-    * [엔티티의 생명주기](#---------)
-    * [영속성 컨텍스트의 이점](#------------)
-        + [**1차 캐시**](#--1------)
-        + [**트랜잭션을 지원하는 쓰기 지연 (transactional write-behind)**](#--------------------transactional-write-behind---)
-        + [**변경 감지 (Dirty Checking)**](#---------dirty-checking---)
-        + [**지연로딩 (Lazy Loading)**](#--------lazy-loading---)
-    * [플러시](#---)
-        + [플러시 모드 옵션](#---------)
-    * [준영속 상태](#------)
-        + [준영속 상태로 만드는 방법](#--------------)
 
 # 영속성 컨텍스트
 - JPA를 이해하는데 가장 중요한 단어
@@ -60,8 +48,8 @@
         Member b = em.find(Member.class, "member1");
         System.out.println(a == b); //동일성 비교 true
         ```
+      
 ### **트랜잭션을 지원하는 쓰기 지연 (transactional write-behind)**
-
 - `em.persist(memberA);` 수행 시
 - 쓰기 지연 SQL 저장소라는 곳에 `INSERT SQL`을 생성해서 쌓아두며, 동시에 1차 캐시에 저장한다.
 - `transaction.commit();` 수행 시 (JPA에서는 `flush`라고 부름)
@@ -110,12 +98,10 @@ transaction.commit(); // [트랜잭션] 커밋
 
 ### 플러시 모드 옵션
 
-FlushModeType.AUTO (Default)
-
+`FlushModeType.AUTO (Default)`
 - 커밋이나 쿼리를 실행할 때 플러시 - 이거만 쓰세요.!!!
 
-FlushModeType.COMMIT
-
+`FlushModeType.COMMIT`
 - 커밋할 경우에만 플러시
 
 ## 준영속 상태
